@@ -18,7 +18,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Programming\Libs\GLAD\src\glad.c">
+    <ClCompile Include="glad.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
