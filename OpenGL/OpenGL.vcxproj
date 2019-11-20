@@ -74,8 +74,8 @@
     <LibraryPath>D:\Programming\Libs\glfw-3.3\src\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\rpikuza\source\repos\openglEngine\OpenGL\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\rpikuza\source\repos\openglEngine\OpenGL\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>.\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
