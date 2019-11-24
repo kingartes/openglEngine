@@ -134,10 +134,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Base.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Drawing.h" />
     <ClInclude Include="includes\custom\Shader.h" />
   </ItemGroup>
   <ItemGroup>

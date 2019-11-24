@@ -2,17 +2,19 @@
 #include <GLFW/glfw3.h>
 
 #include <custom/Shader.h>
+#include <vector>
 
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-int main()
+int InitApp(std::vector<float> vertices)
 {
 	// glfw: initialize and configure
 	// ------------------------------
@@ -51,22 +53,9 @@ int main()
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
-	float vertices[] = {
-		// positions         // colors
-		-1.0f, -1.0f, 0.0f,  1.0f, 1.0f, 1.0f,  
-		-0.5f, -1.0f, 0.0f,  1.0f, 1.0f, 1.0f, 
-		-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f, 
-		-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f, 
-		-1.0f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,
-		-1.0f, -1.0f, 0.0f,  1.0f, 1.0f, 1.0f,
-	// --------------------------------------
-		-0.5f, -1.0f, 0.0f,  0.0f, 0.0f, 0.0f,
-		 0.0f, -1.0f, 0.0f,  0.0f, 0.0f, 0.0f,
-		 0.0f, -0.5f, 0.0f,  0.0f, 0.0f, 0.0f,
-		 0.0f, -0.5f, 0.0f,  0.0f, 0.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 0.0f,
-		-0.5f, -1.0f, 0.0f,  0.0f, 0.0f, 0.0f,
-	};
+	
+
+
 
 	unsigned int VBO, VAO;
 	glGenVertexArrays(1, &VAO);
@@ -75,7 +64,7 @@ int main()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
