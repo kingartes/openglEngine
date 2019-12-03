@@ -92,7 +92,9 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	// glBindVertexArray(0);
 
-
+	int nrAttributes;
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -112,7 +114,7 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size() * 3);
 
 		glBindVertexArray(VAO_LINES);
-		glDrawArrays(GL_LINES, 0, vertices.size() * 3);
+		glDrawArrays(GL_LINES, 0, vertices_lines.size() * 3);
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
