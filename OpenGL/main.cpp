@@ -2,14 +2,20 @@
 #include "Drawing.h"
 #include <iostream>
 
-int InitApp(std::vector<float>);
+int InitApp(std::vector<float>, std::vector<float>);
 
 int main() {
 	DrawingData dd = DrawingData{};
 	dd.DrawTriangle(-1.0f, -1.0f, -0.5f, -1.0f, -0.5f, -0.5f, 1.0f);
 	dd.DrawTriangle(-1.0f, -1.0f, -1.0f, -0.5f, -0.5f, -0.5f, 1.0f);
-	std::vector<float> vertices = dd.GetDrawingData();
+	dd.DrawTriangle(-0.5f, -1.0f,  0.0f, -1.0f,  0.0f, -0.5f, 0.0f);
+	dd.DrawTriangle(-0.5f, -1.0f, -0.5f, -0.5f,  0.0f, -0.5f, 0.0f);
+	 dd.DrawLine(-1.0f, -1.0f, 1.0f, 1.0f, 0.0f);
+	dd.DrawLine(1.0f, -1.0f,  -1.0f, 1.0f, 0.0f);
+
+	std::vector<float> vertices = dd.GetDrawingTrianglesData();
+	std::vector<float> vertices_lines = dd.GetDrawingLinesData();
 	std::cout << sizeof(vertices);
-	InitApp(vertices);
+	InitApp(vertices, vertices_lines);
 	return 0;
 }
