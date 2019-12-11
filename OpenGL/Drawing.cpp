@@ -7,15 +7,15 @@ DrawingData::DrawingData() {
 	vertices_lines = {};
 }
 
-void DrawingData::AddTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float colorRed, float colorGreen, float colorBlue) {
-	vertices.insert(vertices.end(), { x1, y1, 0.0f, colorRed, colorGreen, colorBlue });
-	vertices.insert(vertices.end(), { x2, y2, 0.0f, colorRed, colorGreen, colorBlue });
-	vertices.insert(vertices.end(), { x3, y3, 0.0f, colorRed, colorGreen, colorBlue });
+void DrawingData::AddTriangle(Triangle& triangle, Color& color) {
+	vertices.insert(vertices.end(), { triangle.points[0].x, triangle.points[0].y, triangle.points[0].z, triangle.points[0].w, color.R, color.G, color.B });
+	vertices.insert(vertices.end(), { triangle.points[1].x, triangle.points[1].y, triangle.points[1].z, triangle.points[1].w, color.R, color.G, color.B });
+	vertices.insert(vertices.end(), { triangle.points[2].x, triangle.points[2].y, triangle.points[2].z, triangle.points[2].w, color.R, color.G, color.B });
 }
 
-void DrawingData::AddLine(float x1, float y1, float x2, float y2, float colorRed, float colorGreen, float colorBlue) {
-	vertices_lines.insert(vertices_lines.end(), { x1, y1, 0.0f, colorRed, colorGreen, colorBlue });
-	vertices_lines.insert(vertices_lines.end(), { x2, y2, 0.0f, colorRed, colorGreen, colorBlue });
+void DrawingData::AddLine(glm::vec4& p1, glm::vec4& p2, Color& color) {
+	vertices_lines.insert(vertices_lines.end(), { p1.x, p1.y, p1.z, color.R, color.G, color.B });
+	vertices_lines.insert(vertices_lines.end(), { p2.x, p2.y, p2.z, color.R, color.G, color.B });
 }
 
 std::vector<float> DrawingData::GetDrawingTrianglesData() {

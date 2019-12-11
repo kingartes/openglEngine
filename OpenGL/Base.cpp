@@ -67,10 +67,10 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
 	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(4 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glGenVertexArrays(1, &VAO_LINES);
@@ -106,12 +106,13 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 		// render
 		// ------
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		// glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// render the triangle
 		ourShader.use();
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size() * 3);
+		glDrawArrays(GL_LINES, 0, vertices.size() * 3);
 
 		glBindVertexArray(VAO_LINES);
 		glDrawArrays(GL_LINES, 0, vertices_lines.size() * 3);
