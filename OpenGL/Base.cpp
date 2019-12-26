@@ -5,16 +5,17 @@
 #include <vector>
 
 #include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
-
 
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
+int InitApp(std::vector<float> vertices, std::vector<unsigned int> indices)
 {
 	// glfw: initialize and configure
 	// ------------------------------
@@ -53,13 +54,25 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
-	
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load("download.jfif", &width, &height, &nrChannels, 0);
+	std::cout << width << std::endl;
+	std::cout << height << std::endl;
 
-
-
-	unsigned int VBO, VAO, VAO_LINES, VBO_LINES;
+	unsigned int VBO, VAO, EBO, texture;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
+	glGenTextures(1, &texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	stbi_image_free(data);
+	glGenBuffers(1, &EBO);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(VAO);
 
@@ -67,27 +80,18 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
 	// position attribute
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(4 * sizeof(float)));
+	// color attributete
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	glGenVertexArrays(1, &VAO_LINES);
-	glGenBuffers(1, &VBO_LINES);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO_LINES);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_LINES);
-	glBufferData(GL_ARRAY_BUFFER, vertices_lines.size() * sizeof(float), vertices_lines.data(), GL_STATIC_DRAW);
-
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+	
 	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
 	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	// glBindVertexArray(0);
@@ -95,6 +99,7 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 	int nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -105,17 +110,15 @@ int InitApp(std::vector<float> vertices, std::vector<float> vertices_lines)
 
 		// render
 		// ------
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		// glEnable(GL_DEPTH_TEST);
+		glClearColor(0.2f, 0.9f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// render the triangle
 		ourShader.use();
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_LINES, 0, vertices.size() * 3);
 
-		glBindVertexArray(VAO_LINES);
-		glDrawArrays(GL_LINES, 0, vertices_lines.size() * 3);
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------

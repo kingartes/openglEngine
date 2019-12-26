@@ -1,5 +1,6 @@
 #include <vector>
 #include <glm/vec4.hpp>
+#include <glm/vec2.hpp>
 
 struct Point {
 	float x;
@@ -26,6 +27,7 @@ private:
 public:
 	DrawingData();
 	void AddTriangle(Triangle& triangle, Color& color);
+	void AddVertice(const glm::vec4& vec, const Color& color, const glm::vec2& tex);
 	void AddLine(glm::vec4& p1, glm::vec4& p2, Color& color);
 	std::vector<float> GetDrawingTrianglesData();
 	std::vector<float> GetDrawingLinesData();

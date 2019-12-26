@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="includes\custom\Shader.h" />
+    <ClInclude Include="includes\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="VertexShader.vs">
@@ -154,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PixelShader.ps" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="download.jfif" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,9 +8,13 @@ DrawingData::DrawingData() {
 }
 
 void DrawingData::AddTriangle(Triangle& triangle, Color& color) {
-	vertices.insert(vertices.end(), { triangle.points[0].x, triangle.points[0].y, triangle.points[0].z, triangle.points[0].w, color.R, color.G, color.B });
-	vertices.insert(vertices.end(), { triangle.points[1].x, triangle.points[1].y, triangle.points[1].z, triangle.points[1].w, color.R, color.G, color.B });
-	vertices.insert(vertices.end(), { triangle.points[2].x, triangle.points[2].y, triangle.points[2].z, triangle.points[2].w, color.R, color.G, color.B });
+	vertices.insert(vertices.end(), { triangle.points[0].x, triangle.points[0].y, triangle.points[0].z, color.R, color.G, color.B });
+	vertices.insert(vertices.end(), { triangle.points[1].x, triangle.points[1].y, triangle.points[1].z, color.R, color.G, color.B });
+	vertices.insert(vertices.end(), { triangle.points[2].x, triangle.points[2].y, triangle.points[2].z, color.R, color.G, color.B });
+}
+
+void DrawingData::AddVertice(const glm::vec4& vec,const  Color& color, const glm::vec2& tex) {
+	vertices.insert(vertices.end(), { vec.x, vec.y, vec.z, color.R, color.G, color.B, tex.x, tex.y });
 }
 
 void DrawingData::AddLine(glm::vec4& p1, glm::vec4& p2, Color& color) {
