@@ -38,6 +38,9 @@
     <ClInclude Include="includes\stb_image.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="VertexShader.vs">
@@ -48,8 +51,5 @@
     <None Include="PixelShader.ps">
       <Filter>Файлы ресурсов</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="download.jfif" />
   </ItemGroup>
 </Project>

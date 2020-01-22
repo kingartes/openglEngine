@@ -140,6 +140,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="includes\custom\Shader.h" />
     <ClInclude Include="includes\stb_image.h" />
@@ -155,9 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PixelShader.ps" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="download.jfif" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
