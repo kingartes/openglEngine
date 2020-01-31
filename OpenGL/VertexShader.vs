@@ -10,7 +10,7 @@ uniform mat4 projection;
 
 void main()
 {
-	gl_Position = projection * view * model * time vec4(aPos, 1);
+	gl_Position = projection * view * model *  vec4(aPos, 1);
 	ourColor = aColor;
 	TexCoord = aTexCoord; // set ourColor to the input color we got from the vertex data
 }
