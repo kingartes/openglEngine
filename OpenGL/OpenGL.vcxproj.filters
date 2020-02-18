@@ -18,13 +18,7 @@
     <ClCompile Include="glad.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Base.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Drawing.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,12 +37,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="VertexShader.vs">
+    <None Include="FragmentShader.fhs">
       <Filter>Файлы ресурсов</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PixelShader.ps">
+    </None>
+    <None Include="lamp.fhs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="lamp.vhs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="VertexShader.vhs">
       <Filter>Файлы ресурсов</Filter>
     </None>
   </ItemGroup>

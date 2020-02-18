@@ -134,9 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Base.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,16 +144,10 @@
     <ClInclude Include="includes\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="VertexShader.vs">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <FileType>Document</FileType>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PixelShader.ps" />
+    <None Include="FragmentShader.fhs" />
+    <None Include="lamp.fhs" />
+    <None Include="lamp.vhs" />
+    <None Include="VertexShader.vhs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
